@@ -1,0 +1,15 @@
+{
+  "name": "server.v.2",
+  "version": "1.0.0",
+  "description": "express+react+postgresql+prisma",
+  "main": "index.js",
+  "repository": "https://github.com/inkognit/server.v.2",
+  "author": "michael",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  }
+}
