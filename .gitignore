@@ -1,3 +1,10 @@
 node_modules
 .env
 .vscode
+config
+# директория сборки
+build
+yarn-error2.log
+yarn-error.log
+
+.snowpack
