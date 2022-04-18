@@ -1,6 +1,7 @@
 {
   "name": "fullstack_web_project.v.1",
   "version": "1.0.0",
+  "proxy":"http://localhost:3310",
   "main": "server.ts",
   "keywords": [],
   "description": "my first fullstack web project",
@@ -9,6 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --respawn ./src/server/server.ts",
+    "wds": "npm run start --prefix ../frontend",
     "start": "ts-node  ./src/server/server.ts",    
     "devt": "tsc ./src/server/server.ts"
   },
