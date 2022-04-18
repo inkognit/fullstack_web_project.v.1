@@ -8,20 +8,27 @@ export const useHTTP = () => {
     const request = useCallback(async (
         url: string,
         method: "GET" | "POST" = "GET",
-        body: any = null,
-        headers = method === "POST" ? { "Content-Type": "application/json" } : { "Content-Type": "text/json" }
+        body?,
+        headers?
     ) => {
         setLoading(true)
         try {
+            if (body) {
+                body = JSON.stringify(body)
+                headers["Content-Type"] = "application/json"
+            }
+
             const response = await fetch(url, {
                 method,
-                body: JSON.stringify(body),
+                body,
                 headers,
             })
             const data = await response.json();
+            console.log("data: ", data)
             if (!response.ok) {
                 throw new Error(data || 'Что-то пошло не так')
             }
+            return data
         } catch (error: any) {
             setError(error.message)
             throw error
