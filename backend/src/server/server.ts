@@ -1,15 +1,17 @@
 require('dotenv').config()
 // import cookieParser from "cookie-parser";
-import express, { Express } from "express";
+import { Express } from "express";
 import { env } from "process"
 import { rout } from "../routers/main";
 import { auth } from "../routers/auth";
 import { cookie_middleware } from "./middleware";
-import cors from "cors"
+import cors = require("cors");
+import express = require("express");
+
 
 const server: Express = express();
 const PORT = Number(env.PORT || 3600)
-const NODE_DEP = env.NODE_DEP || 'develop'
+const NODE_DEP = env.NODE_ENV || 'develop'
 
 server.use(express.json({ limit: "30mb" }));
 server.use(express.urlencoded({ limit: "30mb", extended: true }));

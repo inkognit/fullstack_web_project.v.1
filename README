@@ -1,0 +1,6 @@
+docker build -t <dockername> . - build docker images
+
+docker run -p 8001:<your port> <dokername> - start docker images
+
+docker image ls - show all images
+

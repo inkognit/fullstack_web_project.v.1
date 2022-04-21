@@ -1,7 +1,8 @@
-import express from "express";
+import express = require("express")
+
 
 export const rout = express()
 
-rout.get('/', (req, res) => {
+rout.get('/', (_req, res) => {
     res.send({ message: "sdsdfdsfsdf" })
 })

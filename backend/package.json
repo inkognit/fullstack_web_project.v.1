@@ -8,13 +8,14 @@
   "author": "michael and other",
   "license": "ISC",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsnd --respawn ./src/server/server.ts",
+    "dev": "tsnd -respawn --pretty --transpile-only ./src/server/server.ts",
     "wds": "npm run start --prefix ../frontend",
-    "start": "ts-node  ./src/server/server.ts",
-    "devt": "tsc ./src/server/server.ts",
+    "start": "ts-node  ./dist/src/server/server.ts",
+    "clean": "rm -fr build",
+    "build": "npm run clean && tsc --build",
     "generate": "ts-node  ./src/server/server.ts",
-    "migrate": "prisma migrate dev --name"
+    "migrate": "prisma migrate dev --name",
+    "deploy": "tsc && git add . && git commit -m Heroku && git push heroku master"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,6 @@
     "express": "^4.17.3",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
-    "tsc": "^2.0.4",
     "typescript": "^4.6.3"
   },
   "devDependencies": {
