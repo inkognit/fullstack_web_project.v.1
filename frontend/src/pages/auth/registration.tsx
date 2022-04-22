@@ -1,12 +1,13 @@
 import { FC, useCallback, useEffect, useState } from "react"
 import { useHTTP } from "../../app/http.hook"
+import { Input } from "../../components/input"
 export type TData = {
 
     message: string
 
 }
 export const Registration: FC<{}> = () => {
-    const [form, setForm] = useState({ login: '', pass: '' })
+    const [form, setForm] = useState({ login: '', pass: '', name: '' })
 
     const [data, setData] = useState<TData | null>(null)
     const { request, loading } = useHTTP();
@@ -26,9 +27,11 @@ export const Registration: FC<{}> = () => {
 
     const onSubmit = async () => {
         try {
-            await request('/auth/registration', 'POST', {
+            console.log("form: ", form);
+            const res = await request('/auth/registration', 'POST', {
                 ...form,
             })
+            if (res.message) alert(res.message)
         } catch (error) {
             console.log(error)
         }
@@ -37,7 +40,7 @@ export const Registration: FC<{}> = () => {
     //     setData(data)
 
     // }
-    console.log("data: ", data?.message)
+    console.log("data response: ", data?.message)
     const onChangeInput = (event: { target: { value: string; name: string; }; }) => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
@@ -60,17 +63,19 @@ export const Registration: FC<{}> = () => {
 
                 />
             </div>
-            <div>
-                <label htmlFor="pass">password</label>
-                <input
-                    placeholder="enter your pass"
-                    type="pass"
-                    name="pass"
-                    id="pass"
-                    onChange={onChangeInput}
-                />
-
-            </div>
+            <Input
+                name={"pass"}
+                title={"password"}
+                placeholder={"enter your pass"}
+                onChangeInput={onChangeInput}
+            />
+            <Input
+                name={"name"}
+                title={"name"}
+                placeholder={"enter your name"}
+                onChangeInput={onChangeInput}
+            />
+            {/* <Input name={"nickname"} title={"nickname"} placeholder={"enter your nickname"} onChangeInput={onChangeInput} /> */}
             <div>
                 <button onClick={onSubmit} disabled={loading} >send</button>
             </div>

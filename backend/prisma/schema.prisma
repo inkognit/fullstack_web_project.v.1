@@ -3,8 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "postgres"
   url      = env("LOCAL_DATABASE_URL")
+// url = "postgres://admin:192837465@localhost:5432/infinity?sslmode=prefer"
+// url = "postgres://first_test__1751:p0bbAKFhkEaRtso-pOuW@first-test--1751.postgresql.a.osc-fr1.scalingo-dbs.com:33418/first_test__1751?sslmode=prefer"
 }
 
 model User {

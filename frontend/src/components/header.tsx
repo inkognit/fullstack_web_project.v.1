@@ -1,6 +1,7 @@
-import { AppBar, Button, createTheme, IconButton, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, createTheme, IconButton, Link, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/node_modules/@material-ui/styles";
 import { FC } from "react";
+import { routers } from "../app/routers";
 
 const theme = createTheme();
 
@@ -9,13 +10,19 @@ export const Header: FC = () => {
     return (
         <AppBar position="static">
             <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" >
                     {/* <MenuIcon /> */}
                 </IconButton>
-                <Typography variant="h6" className={classes.title}>
-                    News
-                </Typography>
-                <Button color="inherit">Login</Button>
+                <Link href={routers.main} color="secondary" className={classes.title}>
+                    {/* <Typography variant="h6" className={classes.title}> */}
+                    Main
+                    {/* </Typography> */}
+                </Link>
+                <Link href={routers.registration} color="inherit">
+                    {/* <Button color="inherit" onClick={() => <Link href={routers.registration} />}> */}
+                    LOGIN
+                    {/* </Button> */}
+                </Link>
             </Toolbar>
         </AppBar>
     )
@@ -30,6 +37,7 @@ const useStyles = makeStyles({
     },
     title: {
         flexGrow: 1,
+        color: `${theme.palette.info}`
     },
 }, {
     name: "Header"
