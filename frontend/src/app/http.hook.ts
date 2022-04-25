@@ -14,13 +14,11 @@ export const useHTTP = () => {
         setLoading(true)
         try {
             if (body) {
-
                 body = JSON.stringify(body)
                 headers = {
                     'Content-Type': 'application/json'
                     // 'Content-Type': 'application/x-www-form-urlencoded',
                 }
-
             }
 
             const response = await fetch(url, {
@@ -30,7 +28,6 @@ export const useHTTP = () => {
             })
             const data = await response.json();
 
-            console.log("body http: ", data)
             if (!response.ok) {
                 throw new Error(data || 'Что-то пошло не так')
             }

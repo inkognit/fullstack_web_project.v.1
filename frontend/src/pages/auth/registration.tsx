@@ -27,7 +27,6 @@ export const Registration: FC<{}> = () => {
 
     const onSubmit = async () => {
         try {
-            console.log("form: ", form);
             const res = await request('/auth/registration', 'POST', {
                 ...form,
             })
@@ -36,11 +35,7 @@ export const Registration: FC<{}> = () => {
             console.log(error)
         }
     }
-    // if (data) {
-    //     setData(data)
 
-    // }
-    console.log("data response: ", data?.message)
     const onChangeInput = (event: { target: { value: string; name: string; }; }) => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }

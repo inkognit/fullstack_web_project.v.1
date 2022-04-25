@@ -6,3 +6,7 @@ export const rout = express()
 rout.get('/', (_req, res) => {
     res.send({ message: "sdsdfdsfsdf" })
 })
+
+rout.post('/', (_req, _res) => {
+
+})

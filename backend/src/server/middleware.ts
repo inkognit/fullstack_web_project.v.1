@@ -1,17 +1,33 @@
 require('dotenv').config()
-
-// import { Express } from "express";
 import { env } from "process"
+import jwt = require('jsonwebtoken');
 
 
-// const app: Express = express();
 
-
-export const cookie_middleware = (_req: any, _res: any, next: () => void) => {
+export const cookie_middleware = (req: any, _res: any, next: () => void) => {
     if (env.NODE_ENV === "develop") {
-        console.log("middleware!")
-        // if (req.cookies.auth) {
+        const { access_token } = req.body
+        if (access_token) {
 
+            try {
+                const is_check = jwt.verify(access_token, env.ACCESS_TOKEN_SECRET as jwt.Secret)
+                console.log("is_check: ", is_check)
+            } catch (error) {
+                console.log("ahtung!!!")
+            }
+        }
+
+        console.log("middleware!", access_token, "\n", env.ACCESS_TOKEN_SECRET as jwt.Secret)
+        // console.log("middleware!", jwt.verify(access_token, env.ACCESS_TOKEN_SECRET as jwt.Secret,(err, verifiedJwt) => {
+        // if (err) {
+        //     res.send(err.message)
+        // } else {
+        //     res.send(verifiedJwt)
+        // }
+        // ))
+
+        // if (req.cookies.auth) {
+        ///jwt.verify
         // }
         next()
     }

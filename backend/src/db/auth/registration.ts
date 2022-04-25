@@ -1,6 +1,8 @@
 import { SYSTEM_MESSAGE } from '../settings/messages'
 import bcrypt = require("bcrypt")
 import { PQV } from '../settings/generics'
+require('dotenv').config()
+import { env } from "process"
 
 type TRegistration = {
     login: string
@@ -25,8 +27,6 @@ export const registration: TREg = async ({ prisma }, args) => {
         return { ...resp, message }
     }
 
-    console.log("args: ", args)
-
     const checkEmail = await prisma.user.findUnique({
         where: {
             email: String(args.login)
@@ -36,7 +36,7 @@ export const registration: TREg = async ({ prisma }, args) => {
         }
     })
     if (!checkEmail) {
-        const solt = bcrypt.genSaltSync(10)
+        const solt = bcrypt.genSaltSync(Number(env.SOLT) || 10)
         const password = bcrypt.hashSync(args.pass, solt)
 
         const user = await prisma.user.create({
