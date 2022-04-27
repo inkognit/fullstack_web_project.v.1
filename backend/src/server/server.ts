@@ -18,7 +18,7 @@ server.use(express.urlencoded({ limit: "30mb", extended: true }));
 
 server.use(cookieParser());
 server.use(cors())
-server.use('*', cookie_middleware)
+server.use(cookie_middleware)
 server.use('/', rout)
 
 server.use('/auth', authRout)

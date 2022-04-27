@@ -1,6 +1,9 @@
 require('dotenv').config()
 import { env } from "process"
 import jwt = require('jsonwebtoken');
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
 
 export const token: {
     access: {
@@ -37,4 +40,54 @@ export const onRefreshToken = (role: "ADMIN" | "USER", user_id: string) => {
     const secret = env.REFRESH_TOKEN_SECRET as jwt.Secret
     const refresh_token = jwt.sign(payload, secret, { expiresIn: token.refresh.expiresIn })
     return { user_id, refresh_token }
+}
+
+export const onTokenCheck = async (user_id: string) => {
+
+    let res = ''
+    console.log("user_id: ", user_id)
+    const user = await prisma.user.findUnique({
+        where: {
+            id: user_id
+        },
+        select: {
+            refresh: true,
+            role: true
+        }
+    })
+    const refresh_secret = env.REFRESH_TOKEN_SECRET as jwt.Secret
+    const role = user?.role
+    const refresh = user?.refresh
+
+    if (refresh) {
+        const refresh_payload = jwt.decode(refresh)
+        if (typeof refresh_payload == "object") {
+            if (refresh_payload?.user_id !== user_id) {
+                return;
+            }
+        }
+        try {
+            if (role && jwt.verify(refresh, refresh_secret)) {
+
+                res = onAccessToken(role, user_id)
+                return res
+            }
+        } catch (error) {
+            if (role) {
+
+                await prisma.user.update({
+                    where: {
+                        id: user_id
+                    },
+                    data: {
+                        refresh: null
+                    }
+                })
+                return res
+            }
+        }
+
+    }
+    return
+
 }
