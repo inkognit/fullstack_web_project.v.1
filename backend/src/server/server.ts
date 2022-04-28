@@ -24,5 +24,5 @@ server.use('/', rout)
 server.use('/auth', authRout)
 
 server.listen(PORT, () => {
-    console.log(`\u3355 we started with http://localhost:${PORT} \n dependency: ${NODE_DEP}`)
+    console.log(`\u2705 we started with http://localhost:${PORT} \n dependency: ${NODE_DEP}`)
 })

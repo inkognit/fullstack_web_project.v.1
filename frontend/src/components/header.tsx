@@ -1,5 +1,6 @@
 import {
     AppBar,
+    Button,
     createTheme,
     Grid,
     IconButton,
@@ -12,7 +13,7 @@ import { routers } from '../app/routers'
 
 const theme = createTheme()
 
-export const Header: FC = () => {
+export const Header: FC<{ is_auth: boolean }> = ({ is_auth }) => {
     const classes = useStyles(theme)
     return (
         <AppBar position="static">
@@ -25,29 +26,41 @@ export const Header: FC = () => {
                 >
                     {/* <MenuIcon /> */}
                 </IconButton>
-                <Link
-                    href={routers.main}
-                    color="secondary"
-                    className={classes.title}
-                >
-                    {/* <Typography variant="h6" className={classes.title}> */}
-                    Main
-                    {/* </Typography> */}
-                </Link>
-                <Grid>
+                <Grid className={classes.title}>
+                    <Link
+                        href={routers.main}
+                        color="secondary"
+                    //
+                    >
+                        <Button>
+
+                            {/* <Typography variant="h6" className={classes.title}> */}
+                            Main
+
+                        </Button>
+                    </Link>
+                </Grid>
+
+                {is_auth ? (<>
 
                     <Link href={routers.registration} color="inherit">
-                        {/* <Button color="inherit" onClick={() => <Link href={routers.registration} />}> */}
-                        LOGIN
-                        {/* </Button> */}
+                        <Button >
+                            LOGIN
+                        </Button>
                     </Link>
-                </Grid>
-                <Grid>
-
                     <Link href={routers.auth} color="inherit">
-                        AUTH
+                        <Button >
+                            AUTH
+                        </Button>
                     </Link>
-                </Grid>
+
+                </>) : (<>
+                    <Link href={routers.users} color="inherit">
+                        <Button >
+                            Account
+                        </Button>
+                    </Link>
+                </>)}
             </Toolbar>
         </AppBar>
     )
@@ -56,7 +69,7 @@ export const Header: FC = () => {
 const useStyles = makeStyles(
     {
         root: {
-            flexGrow: 1,
+            flexGrow: 1, color: `${theme.palette.info}`,
         },
         menuButton: {
             marginRight: theme.spacing(2),
@@ -64,6 +77,7 @@ const useStyles = makeStyles(
         title: {
             flexGrow: 1,
             color: `${theme.palette.info}`,
+
         },
     },
     {

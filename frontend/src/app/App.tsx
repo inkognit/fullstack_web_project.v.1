@@ -12,8 +12,8 @@ export const App: FC<{}> = () => {
       const access_token = localStorage.getItem("auth_token")
       setIsAuth(access_token ? true : false)
 
-      console.log(typeof access_token)
-      const request = await fetch('/', {
+      console.log(access_token)
+      const request = await fetch('', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ export const App: FC<{}> = () => {
   const router = useRouters(is_auth)
   return (
     <Router>
-      <Header />
+      <Header is_auth={!is_auth} />
       <div>
         {router}
       </div>
