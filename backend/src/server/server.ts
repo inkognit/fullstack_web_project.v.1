@@ -7,12 +7,14 @@ import { authRout } from "../routers/auth";
 import { cookie_middleware } from "./middleware";
 import cors = require("cors");
 import express = require("express");
+import morgan = require('morgan');
 
 
 const server: Express = express();
 const PORT = Number(env.PORT || 3600)
 const NODE_DEP = env.NODE_ENV || 'develop'
 
+server.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 server.listen(PORT, () => {
     console.log(`\u2705 we started with http://localhost:${PORT} \n dependency: ${NODE_DEP}`)
 })
@@ -22,6 +24,7 @@ server.use(express.urlencoded({ limit: "30mb", extended: true }));
 
 server.use(cookieParser());
 server.use(cors())
+
 server.use("/", cookie_middleware)
 server.use('/', rout)
 

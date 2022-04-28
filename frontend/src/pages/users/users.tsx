@@ -8,7 +8,6 @@ export const Users: FC<{}> = () => {
     const load = useCallback(async () => {
         try {
             const response = await request('/users', 'GET')
-
             setData({ ...response })
         } catch (error) {
             console.log(error)

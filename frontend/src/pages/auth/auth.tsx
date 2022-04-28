@@ -10,7 +10,6 @@ export const Auth: FC = () => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
     const onSubmit = async () => {
-        console.log("form2: ", form)
         const data = await request('/auth/', 'POST', {
             ...form,
         })

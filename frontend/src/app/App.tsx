@@ -11,8 +11,6 @@ export const App: FC<{}> = () => {
     async () => {
       const access_token = localStorage.getItem("auth_token")
       setIsAuth(access_token ? true : false)
-
-      console.log(access_token)
       const request = await fetch('/', {
         method: "POST",
         headers: {
@@ -22,14 +20,12 @@ export const App: FC<{}> = () => {
         body: JSON.stringify({ access_token })
       })
       const responce = await request.json()
-      console.log("res: ", responce)
       const new_access_token = responce.access_token
       if (new_access_token) {
         localStorage.setItem("auth_token", new_access_token)
       } else {
         localStorage.removeItem("auth_token")
       }
-      console.log("new_access_token: ", new_access_token)
     }, []
   )
 

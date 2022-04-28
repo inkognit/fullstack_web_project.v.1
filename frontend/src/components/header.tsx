@@ -30,13 +30,18 @@ export const Header: FC<{ is_auth: boolean }> = ({ is_auth }) => {
                     <Link
                         href={routers.main}
                         color="secondary"
-                    //
                     >
                         <Button>
-
                             {/* <Typography variant="h6" className={classes.title}> */}
                             Main
+                        </Button>
 
+                    </Link>                       <Link
+                        href={routers.users}
+                        color="secondary"
+                    >
+                        <Button>
+                            Users
                         </Button>
                     </Link>
                 </Grid>

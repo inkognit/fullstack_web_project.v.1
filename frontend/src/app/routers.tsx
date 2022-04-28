@@ -17,13 +17,13 @@ export const routers = {
 export const useRouters = (is_auth) => {
     return (
         <Routes>
-            {!is_auth ? <>
-                <Route path={routers.registration} element={<Registration />} />
-                <Route path={routers.auth} element={<Auth />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-            </> : <>
+            {is_auth ? <>
                 <Route path={routers.user} element={<User />} />
                 <Route path={routers.users} element={<Users />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </> : <>
+                <Route path={routers.registration} element={<Registration />} />
+                <Route path={routers.auth} element={<Auth />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
             </>}
             <Route path={routers.main} element={<Main />} />

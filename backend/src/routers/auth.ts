@@ -13,7 +13,6 @@ authRout.get('/', (_req, res) => {
 authRout.post('/', async (req, res) => {
     const data = await auth({ prisma }, req.body)
     res.send({ ...data })
-    console.log(data)
     // res.redirect('/')
 })
 

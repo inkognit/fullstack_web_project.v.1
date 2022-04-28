@@ -45,7 +45,7 @@ export const onRefreshToken = (role: "ADMIN" | "USER", user_id: string) => {
 export const onTokenCheck = async (user_id: string) => {
 
     let res = ''
-    console.log("user_id: ", user_id)
+
     const user = await prisma.user.findUnique({
         where: {
             id: user_id
