@@ -10,3 +10,7 @@ rout.get('/', (_req, res) => {
 rout.post('/', (_req, _res) => {
 
 })
+
+rout.get('/users', (_req, res) => {
+    return res.send({ message: "sdsdfdsfsdf" })
+})
