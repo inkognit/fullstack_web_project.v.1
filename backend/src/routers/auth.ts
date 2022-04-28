@@ -4,7 +4,7 @@ import { auth } from "../db/auth/auth"
 import { registration } from "../db/auth/registration"
 const prisma = new PrismaClient()
 
-export const authRout = express()
+export const authRout = express.Router()
 
 authRout.get('/', (_req, res) => {
     res.send({ message: "asda" })

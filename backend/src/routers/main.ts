@@ -1,7 +1,7 @@
 import express = require("express")
 
 
-export const rout = express()
+export const rout = express.Router()
 
 rout.get('/', (_req, res) => {
     res.send({ message: "sdsdfdsfsdf" })

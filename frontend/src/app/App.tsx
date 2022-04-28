@@ -13,10 +13,11 @@ export const App: FC<{}> = () => {
       setIsAuth(access_token ? true : false)
 
       console.log(access_token)
-      const request = await fetch('', {
+      const request = await fetch('/', {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({ access_token })
       })
